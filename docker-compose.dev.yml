@@ -2,8 +2,10 @@ services:
   server:
     build:
       context: .
+      target: development
     ports:
       - 8080:8080
+      - 8000:8000
     depends_on:
       db:
         condition: service_healthy
@@ -11,8 +13,8 @@ services:
       - POSTGRES_URL=jdbc:postgresql://db:5432/petclinic
     develop:
       watch:
-         - action: rebuild
-           path: .
+        - action: rebuild
+          path: .
   db:
     image: postgres
     restart: always
